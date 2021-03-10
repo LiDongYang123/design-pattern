@@ -1,0 +1,21 @@
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://lidongyang:123456@${eureka.instance.hostname}:8888/eureka/
+    healthcheck:
+      enabled: true
+
+spring:
+  application:
+    name: eureka-server
+  security:
+    user:
+      name: lidongyang
+      password: 123456
+server:
+  port: 8888
