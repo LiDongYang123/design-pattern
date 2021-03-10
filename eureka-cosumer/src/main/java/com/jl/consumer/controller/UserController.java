@@ -1,11 +1,14 @@
 package com.jl.consumer.controller;
 
 
+import com.jl.consumer.service.UserService;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -14,6 +17,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
+
 public class UserController {
 
     @Resource(name = "eurekaClient")
@@ -24,6 +28,9 @@ public class UserController {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping(value = "/getUserInfo")
     public String getUserInfo() {
@@ -54,4 +61,10 @@ public class UserController {
         String url = "http://eureka-provider/ribbon";
         return restTemplate.getForObject(url, String.class);
     }
+
+    @GetMapping(value = "/feign")
+    public String feign(){
+        return userService.feign();
+    }
+
 }

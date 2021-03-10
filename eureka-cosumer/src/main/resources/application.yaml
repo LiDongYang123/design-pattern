@@ -12,3 +12,13 @@ spring:
 
 server:
   port: 8083
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "localhost"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+

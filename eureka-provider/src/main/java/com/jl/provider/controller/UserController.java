@@ -29,4 +29,10 @@ public class UserController {
     public String ribbon(){
         return "XXXXXXXXXXXXXribbon调用的provider的端口是：" + port;
     }
+
+
+    @GetMapping(value = "/feign")
+    public String feign(){
+        return "feign";
+    }
 }
