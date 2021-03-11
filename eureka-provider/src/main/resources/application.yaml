@@ -10,5 +10,12 @@ spring:
     name: eureka-provider
 
 
+
 server:
   port: 8082
+
+
+
+
+
+

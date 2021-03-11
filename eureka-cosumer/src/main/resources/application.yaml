@@ -8,6 +8,12 @@ eureka:
 spring:
   application:
     name: eureka-consumer
+  boot:
+    admin:
+      client:
+        url:
+        instance:
+          service-url: localhost:8082
 
 
 server:
@@ -20,5 +26,9 @@ management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
 
