@@ -100,6 +100,58 @@ public class CacheLineTest {
         }
     }
 
+    @Test
+    public void test4() throws InterruptedException {
+
+        Thread threadOne =  new Thread(
+                () -> {
+                    for (int i = 0; i < 100; i++) {
+
+                    System.out.println("1111");
+                    }
+                }
+        );
+        Thread threadTwo =  new Thread(
+                () -> {
+                    for (int i = 0; i < 100; i++) {
+
+                    System.out.println("2222");
+                    }
+                }
+        );
+        threadOne.start();
+        threadTwo.start();
+        threadOne.join();
+        threadTwo.join();
+    }
+
+    @Test
+    public void test5() throws InterruptedException {
+        long[] arr = new long[2];
+        Thread threadOne = new Thread(
+                () -> {
+                    for (int i = 0; i < 100; i++) {
+                        arr[0] = i;
+                    }
+                }
+        );
+
+        Thread threadTwo = new Thread(
+                () -> {
+                    for (int i = 0; i < 100; i++) {
+                        arr[1] = i;
+                    }
+                }
+        );
+        long startTime = System.nanoTime();
+        threadOne.start();
+        threadOne.join();
+        threadTwo.start();
+        threadTwo.join();
+        System.out.println( (System.nanoTime() - startTime) / 100_0000l );
+    }
+
+
 
 
 
