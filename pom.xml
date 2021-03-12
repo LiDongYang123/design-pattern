@@ -55,6 +55,7 @@
         <module>eureka-server</module>
         <module>eureka-provider</module>
         <module>eureka-cosumer</module>
+        <module>bottom-test</module>
     </modules>
 
 </project>
