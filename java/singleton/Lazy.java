@@ -1,34 +1,26 @@
 package singleton;
 
+import vo.Person;
+
 /**
- * 懒汉，按需加载，有线程安全问题
- */
+ * @ClassName Lazy
+ * @Description 懒汉式单例
+ * @Author lidongyang
+ * @Date 2022/9/19 14:48
+ * @Version 1.0
+ **/
 public class Lazy {
-
-    private Lazy(){}
-
-    private static Lazy instance;
-
-    public static Lazy getInstance() {
-        if (null == instance) {
-            try {
-                Thread.sleep(1);
-            } catch(InterruptedException e) {
-                e.printStackTrace();
-            }
-            instance = new Lazy();
-            return instance;
+    public static Person person;
+    public static synchronized Person getInstance() {
+        if (null == person) {
+            person = new Person();
         }
-        return instance;
+        return person;
     }
-
 
     public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
-            new Thread(() -> {
-                System.out.println(Lazy.getInstance().hashCode());
-            }).start();
-        }
+        Person instance1 = Lazy.getInstance();
+        Person instance2 = Lazy.getInstance();
+        System.out.println(instance1 == instance2);
     }
-
 }

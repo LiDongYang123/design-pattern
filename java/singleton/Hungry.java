@@ -1,20 +1,25 @@
 package singleton;
 
+import vo.Person;
+
 /**
- * 懒汉
- */
+ * @ClassName Hungry
+ * @Description 饿汉式单例
+ * @Author lidongyang
+ * @Date 2022/9/19 14:43
+ * @Version 1.0
+ **/
 public class Hungry {
-
-    public static Hungry instance = new Hungry();
-
-    private Hungry(){};
-
-    public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
-            new Thread(() -> {
-                System.out.println(Hungry.instance.hashCode());
-            }).start();
-        }
+    public static Person person = new Person();
+    private Hungry() {}
+    public static Person getInstance() {
+        return person;
     }
 
+
+    public static void main(String[] args) {
+        Person instance1 = Hungry.getInstance();
+        Person instance2 = Hungry.getInstance();
+        System.out.println(instance1 == instance2);
+    }
 }
